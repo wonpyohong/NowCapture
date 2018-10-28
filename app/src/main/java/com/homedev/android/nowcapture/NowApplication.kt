@@ -2,6 +2,7 @@ package com.homedev.android.nowcapture
 
 import android.app.Application
 import android.content.Context
+import com.facebook.stetho.Stetho
 
 class NowApplication: Application() {
     init {
@@ -13,5 +14,11 @@ class NowApplication: Application() {
 
         val applicationContext: Context
             get() = instance!!.applicationContext
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+
+        Stetho.initializeWithDefaults(this)
     }
 }
