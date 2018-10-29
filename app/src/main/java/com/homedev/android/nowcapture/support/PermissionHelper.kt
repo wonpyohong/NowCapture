@@ -13,7 +13,7 @@ import java.util.ArrayList
 class PermissionHelper(val context: Context) {
     private val permissionListener = object: PermissionListener {
         override fun onPermissionGranted() {
-            Toast.makeText(context, "권한 허가", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(context, "권한 허가", Toast.LENGTH_SHORT).show()
         }
 
         override fun onPermissionDenied(deniedPermissions: ArrayList<String>?) {

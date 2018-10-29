@@ -19,7 +19,8 @@ class MainActivity : AppCompatActivity() {
         permissionHelper.requestPermssionIfNeed()
 
         screenShotButton.setOnClickListener {
-            captureHelper.takeScreenshot(window)
+            val imageFile = captureHelper.takeScreenshot(window)
+            captureHelper.scanImageFiles(imageFile) { captureHelper.openScreenshot(imageFile)}
         }
     }
 }

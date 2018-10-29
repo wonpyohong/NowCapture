@@ -15,15 +15,11 @@ import java.io.FileOutputStream
 import java.util.*
 
 class CaptureHelper {
-    fun takeScreenshot(window: Window) {
-        try {
-            val bitmap = captureRoot(window)
-            val imageFile = createImageFile()
-            writeBitmapToFile(imageFile, bitmap)
-            scanImageFiles(imageFile)
-        } catch (e: Throwable) {
-            e.printStackTrace()
-        }
+    fun takeScreenshot(window: Window): File {
+        val bitmap = captureRoot(window)
+        val imageFile = createImageFile()
+        writeBitmapToFile(imageFile, bitmap)
+        return imageFile
     }
 
     private fun captureRoot(window: Window): Bitmap {
@@ -51,15 +47,15 @@ class CaptureHelper {
         outputStream.close()
     }
 
-    private fun scanImageFiles(imageFile: File) {
+    fun scanImageFiles(imageFile: File, onCompleted: () -> Unit) {
         MediaScannerConnection.scanFile(Components.getAppContext(),
                 arrayOf(imageFile.toString()), arrayOf("image/*")
         ) { path, uri ->
-            openScreenshot(imageFile)
+            onCompleted()
         }
     }
 
-    private fun openScreenshot(imageFile: File) {
+    fun openScreenshot(imageFile: File) {
         val intent = Intent()
         intent.action = Intent.ACTION_VIEW
         val uri = fromFile(imageFile)
