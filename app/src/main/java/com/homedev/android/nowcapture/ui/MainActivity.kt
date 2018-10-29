@@ -1,7 +1,9 @@
-package com.homedev.android.nowcapture
+package com.homedev.android.nowcapture.ui
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import com.homedev.android.nowcapture.R
+import com.homedev.android.nowcapture.capture.CaptureHelper
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -16,6 +18,4 @@ class MainActivity : AppCompatActivity() {
             captureHelper.takeScreenshot(window)
         }
     }
-
-
 }

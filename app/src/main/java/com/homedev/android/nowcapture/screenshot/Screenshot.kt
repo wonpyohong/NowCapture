@@ -1,4 +1,4 @@
-package com.homedev.android.nowcapture
+package com.homedev.android.nowcapture.screenshot
 
 import android.graphics.Bitmap
 import android.view.View

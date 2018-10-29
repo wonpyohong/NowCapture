@@ -1,4 +1,4 @@
-package com.homedev.android.nowcapture
+package com.homedev.android.nowcapture.capture
 
 import android.content.Intent
 import android.graphics.Bitmap
@@ -8,12 +8,11 @@ import android.os.Build
 import android.os.Environment
 import android.support.v4.content.FileProvider
 import android.text.format.DateFormat
-import android.util.Log
 import android.view.Window
+import com.homedev.android.nowcapture.NowApplication
 import java.io.File
 import java.io.FileOutputStream
 import java.util.*
-import kotlin.concurrent.schedule
 
 class CaptureHelper {
     fun takeScreenshot(window: Window) {
