@@ -1,0 +1,39 @@
+ext.ver = [
+        supportLib: '27.1.1',
+        dagger    : '2.16',
+        stetho    : '1.5.0',
+        junit     : '4.12',
+        runner    : '1.0.2',
+        espresso  : '3.0.2'
+]
+
+ext.deps = [
+        supportLib: [
+                kotlin    : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
+                compat    : "com.android.support:appcompat-v7:${ver.supportLib}",
+                constraint: 'com.android.support.constraint:constraint-layout:1.1.3'
+        ],
+
+        normal    : [
+                // dagger
+                dagger                : "com.google.dagger:dagger:${ver.dagger}",
+                daggerCompiler        : "com.google.dagger:dagger-compiler:${ver.dagger}",
+                daggerAndroid         : "com.google.dagger:dagger-android:${ver.dagger}",
+                daggerAndroidSupport  : "com.google.dagger:dagger-android-support:${ver.dagger}",
+                daggerAndroidProcessor: "com.google.dagger:dagger-android-processor:${ver.dagger}",
+
+                // firebase
+                firebaseCore          : 'com.google.firebase:firebase-core:16.0.4',
+                firebaseCrashlytics   : 'com.crashlytics.sdk.android:crashlytics:2.9.5',
+
+                // stetho
+                stetho                : "com.facebook.stetho:stetho:${ver.stetho}",
+                stethoOkhttp3         : "com.facebook.stetho:stetho-okhttp3:${ver.stetho}"
+        ],
+
+        test      : [
+                junit       : "junit:junit:${ver.junit}",
+                runner      : "com.android.support.test:runner:${ver.runner}",
+                espressoCore: "com.android.support.test.espresso:espresso-core:${ver.espresso}"
+        ]
+]
