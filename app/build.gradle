@@ -55,4 +55,7 @@ dependencies {
     testImplementation deps.test.junit
     androidTestImplementation deps.test.runner
     androidTestImplementation deps.test.espressoCore
+
+    // Marshmello permission
+    implementation 'gun0912.ted:tedpermission:2.0.0'
 }
