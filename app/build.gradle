@@ -40,7 +40,7 @@ dependencies {
     implementation deps.normal.dagger
     implementation deps.normal.daggerAndroid
     implementation deps.normal.daggerAndroidSupport
-    annotationProcessor deps.normal.daggerAndroidProcessor
+    kapt deps.normal.daggerAndroidProcessor
     kapt deps.normal.daggerCompiler
 
     // firebase
