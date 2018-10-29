@@ -9,7 +9,7 @@ import android.os.Environment
 import android.support.v4.content.FileProvider
 import android.text.format.DateFormat
 import android.view.Window
-import com.homedev.android.nowcapture.NowApplication
+import com.homedev.android.nowcapture.Components
 import java.io.File
 import java.io.FileOutputStream
 import java.util.*
@@ -52,7 +52,7 @@ class CaptureHelper {
     }
 
     private fun scanImageFiles(imageFile: File) {
-        MediaScannerConnection.scanFile(NowApplication.applicationContext,
+        MediaScannerConnection.scanFile(Components.getAppContext(),
                 arrayOf(imageFile.toString()), arrayOf("image/*")
         ) { path, uri ->
             openScreenshot(imageFile)
@@ -64,13 +64,13 @@ class CaptureHelper {
         intent.action = Intent.ACTION_VIEW
         val uri = fromFile(imageFile)
         intent.setDataAndType(uri, "image/*")
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        NowApplication.applicationContext.startActivity(intent)
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        Components.getAppContext().startActivity(intent)
     }
 
     private fun fromFile(file: File): Uri {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {        // 24 이상
-            FileProvider.getUriForFile(NowApplication.applicationContext, NowApplication.applicationContext.packageName + ".fileprovider", file)
+            FileProvider.getUriForFile(Components.getAppContext(), Components.getAppContext().packageName + ".fileprovider", file)
         } else {
             Uri.fromFile(file)
         }
