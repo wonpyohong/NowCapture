@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         overdrawPermissionHelper.startCheck()
 
         screenShotButton.setOnClickListener {
-            val imageFile = captureHelper.takeScreenshot(window)
+            val imageFile = captureHelper.capture(window.decorView.rootView)
             captureHelper.scanImageFiles(imageFile) {
                 captureHelper.openScreenshot(imageFile)
             }
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         getActionSendAppList.setOnClickListener {
-            val imageFile = captureHelper.takeScreenshot(window)
+            val imageFile = captureHelper.capture(window.decorView.rootView)
             captureHelper.scanImageFiles(imageFile) {
                 captureHelper.requestAppActionSendImage(imageFile, packageManager)
             }

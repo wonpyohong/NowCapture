@@ -10,25 +10,24 @@ import android.os.Environment
 import android.support.v4.content.FileProvider
 import android.text.format.DateFormat
 import android.util.Log
-import android.view.Window
+import android.view.View
 import com.homedev.android.nowcapture.Components
 import java.io.File
 import java.io.FileOutputStream
 import java.util.*
 
 class CaptureHelper {
-    fun takeScreenshot(window: Window): File {
-        val bitmap = captureRoot(window)
+    fun capture(view: View): File {
+        val bitmap = captureBitmap(view)
         val imageFile = createImageFile()
         writeBitmapToFile(imageFile, bitmap)
         return imageFile
     }
 
-    private fun captureRoot(window: Window): Bitmap {
-        val rootView = window.decorView.rootView
-        rootView.isDrawingCacheEnabled = true
-        val bitmap = Bitmap.createBitmap(rootView.drawingCache)
-        rootView.isDrawingCacheEnabled = false
+    private fun captureBitmap(view: View): Bitmap {
+        view.isDrawingCacheEnabled = true
+        val bitmap = Bitmap.createBitmap(view.drawingCache)
+        view.isDrawingCacheEnabled = false
         return bitmap
     }
 
