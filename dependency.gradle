@@ -22,6 +22,10 @@ ext.deps = [
                 daggerAndroidSupport  : "com.google.dagger:dagger-android-support:${ver.dagger}",
                 daggerAndroidProcessor: "com.google.dagger:dagger-android-processor:${ver.dagger}",
 
+                // rx
+                rxJava                : 'io.reactivex.rxjava2:rxjava:2.2.2',
+                rxAndroid             : 'io.reactivex.rxjava2:rxandroid:2.1.0',
+
                 // firebase
                 firebaseCore          : 'com.google.firebase:firebase-core:16.0.4',
                 firebaseCrashlytics   : 'com.crashlytics.sdk.android:crashlytics:2.9.5',

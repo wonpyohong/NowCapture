@@ -43,6 +43,10 @@ dependencies {
     kapt deps.normal.daggerAndroidProcessor
     kapt deps.normal.daggerCompiler
 
+    // rx
+    implementation deps.normal.rxJava
+    implementation deps.normal.rxAndroid
+
     // firebase
     implementation deps.normal.firebaseCore
     implementation deps.normal.firebaseCrashlytics
