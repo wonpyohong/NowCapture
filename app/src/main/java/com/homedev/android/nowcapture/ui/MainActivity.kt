@@ -6,16 +6,10 @@ import com.homedev.android.nowcapture.R
 import com.homedev.android.nowcapture.capture.CaptureHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import com.homedev.android.nowcapture.support.PermissionHelper
-import android.provider.Settings.ACTION_MANAGE_OVERLAY_PERMISSION
 import android.content.Intent
-import android.net.Uri
-import android.provider.Settings.canDrawOverlays
-import android.os.Build
-import android.provider.Settings
-import android.view.View
-import android.widget.Toast
 import com.homedev.android.nowcapture.NowService
 import com.homedev.android.nowcapture.support.OverdrawPermssionHelper
+
 
 class MainActivity : AppCompatActivity() {
     val captureHelper = CaptureHelper()
@@ -31,12 +25,21 @@ class MainActivity : AppCompatActivity() {
 
         screenShotButton.setOnClickListener {
             val imageFile = captureHelper.takeScreenshot(window)
-            captureHelper.scanImageFiles(imageFile) { captureHelper.openScreenshot(imageFile)}
+            captureHelper.scanImageFiles(imageFile) {
+                captureHelper.openScreenshot(imageFile)
+            }
         }
 
         startfloatingButton.setOnClickListener {
             startService(Intent(this@MainActivity, NowService::class.java))
             finish()
+        }
+
+        getActionSendAppList.setOnClickListener {
+            val imageFile = captureHelper.takeScreenshot(window)
+            captureHelper.scanImageFiles(imageFile) {
+                captureHelper.requestAppActionSendImage(imageFile, packageManager)
+            }
         }
     }
 

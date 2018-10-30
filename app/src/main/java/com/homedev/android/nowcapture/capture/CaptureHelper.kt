@@ -1,6 +1,7 @@
 package com.homedev.android.nowcapture.capture
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.media.MediaScannerConnection
 import android.net.Uri
@@ -8,6 +9,7 @@ import android.os.Build
 import android.os.Environment
 import android.support.v4.content.FileProvider
 import android.text.format.DateFormat
+import android.util.Log
 import android.view.Window
 import com.homedev.android.nowcapture.Components
 import java.io.File
@@ -62,6 +64,23 @@ class CaptureHelper {
         intent.setDataAndType(uri, "image/*")
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         Components.getAppContext().startActivity(intent)
+    }
+
+    fun requestAppActionSendImage(imageFile: File, packageManager: PackageManager) {
+        val packageList: MutableList<String> = mutableListOf()
+
+        val sendIntent = Intent()
+        sendIntent.action = Intent.ACTION_SEND
+        sendIntent.type = "image/*"
+        sendIntent.putExtra(Intent.EXTRA_STREAM, fromFile(imageFile))
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "test")
+        val resolveInfoList = packageManager
+                .queryIntentActivities(sendIntent, 0)
+
+        for (resolveInfo in resolveInfoList) {
+            Log.d("HWP", resolveInfo.loadLabel(packageManager).toString())
+            packageList.add(resolveInfo.activityInfo.packageName)
+        }
     }
 
     private fun fromFile(file: File): Uri {

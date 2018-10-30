@@ -1,33 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.MainActivity">
 
     <Button
         android:id="@+id/screenShotButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="전체 스크린샷"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.727"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.146" />
+        android:text="전체 스크린샷" />
 
     <Button
         android:id="@+id/startfloatingButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="floating button 추가"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.236"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.302" />
+        android:text="floating button 추가" />
 
-</android.support.constraint.ConstraintLayout>
+    <Button
+        android:id="@+id/getActionSendAppList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ACTION_SEND 앱 목록 로그 찍기" />
+
+</LinearLayout>
