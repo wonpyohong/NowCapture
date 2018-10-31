@@ -36,6 +36,11 @@ dependencies {
     implementation deps.supportLib.compat
     implementation deps.supportLib.constraint
 
+    // android architecture component
+    implementation deps.arch.common
+    implementation deps.arch.extensions
+    implementation deps.arch.reactivestreams
+
     // dagger
     implementation deps.normal.dagger
     implementation deps.normal.daggerAndroid

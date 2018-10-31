@@ -15,8 +15,13 @@ import com.homedev.android.nowcapture.Components
 import java.io.File
 import java.io.FileOutputStream
 import java.util.*
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class CaptureHelper {
+
+@Singleton
+class CaptureHelper @Inject constructor() {
+
     fun capture(view: View): File {
         val bitmap = captureBitmap(view)
         val imageFile = createImageFile()

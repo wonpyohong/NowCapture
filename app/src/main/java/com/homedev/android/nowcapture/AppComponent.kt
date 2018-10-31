@@ -2,6 +2,7 @@ package com.homedev.android.nowcapture
 
 import android.app.Application
 import android.content.Context
+import com.homedev.android.nowcapture.support.dagger.module.ActivityBinder
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -12,7 +13,7 @@ import javax.inject.Singleton
  * Created by jaehyunpark on 2018. 10. 29..
  */
 @Singleton
-@Component(modules = [(AppModule::class), (AndroidSupportInjectionModule::class)])
+@Component(modules = [(AppModule::class), (AndroidSupportInjectionModule::class), (ActivityBinder::class)])
 interface AppComponent : AndroidInjector<NowApplication> {
 
     fun getAppContext(): Context
