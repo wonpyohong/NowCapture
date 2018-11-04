@@ -17,7 +17,21 @@ import java.io.FileOutputStream
 import java.util.*
 
 
-fun capture(view: View): File {
+fun captureImage(captureView: View) {
+    val captureFile = capture(captureView)
+    scanImageFiles(captureFile) {
+        openScreenshot(captureFile)
+    }
+}
+
+fun shareCaptureImage(captureView: View, packageManager: PackageManager) {
+    val imageFile = capture(captureView)
+    scanImageFiles(imageFile) {
+        requestAppActionSendImage(imageFile, packageManager)
+    }
+}
+
+private fun capture(view: View): File {
     val bitmap = captureBitmap(view)
     val imageFile = createImageFile()
     writeBitmapToFile(imageFile, bitmap)
@@ -48,7 +62,7 @@ private fun writeBitmapToFile(imageFile: File, bitmap: Bitmap) {
     outputStream.close()
 }
 
-fun scanImageFiles(imageFile: File, onCompleted: () -> Unit) {
+private fun scanImageFiles(imageFile: File, onCompleted: () -> Unit) {
     MediaScannerConnection.scanFile(Components.getAppContext(),
             arrayOf(imageFile.toString()), arrayOf("image/*")
     ) { path, uri ->
@@ -56,7 +70,7 @@ fun scanImageFiles(imageFile: File, onCompleted: () -> Unit) {
     }
 }
 
-fun openScreenshot(imageFile: File) {
+private fun openScreenshot(imageFile: File) {
     val intent = Intent()
     intent.action = Intent.ACTION_VIEW
     val uri = fromFile(imageFile)
@@ -65,7 +79,7 @@ fun openScreenshot(imageFile: File) {
     Components.getAppContext().startActivity(intent)
 }
 
-fun requestAppActionSendImage(imageFile: File, packageManager: PackageManager) {
+private fun requestAppActionSendImage(imageFile: File, packageManager: PackageManager) {
     val packageList: MutableList<String> = mutableListOf()
 
     val sendIntent = Intent()

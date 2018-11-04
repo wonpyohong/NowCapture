@@ -3,12 +3,14 @@ package com.homedev.android.nowcapture.ui
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.LiveDataReactiveStreams
 import android.content.pm.PackageManager
-import com.homedev.android.nowcapture.capture.openScreenshot
-import com.homedev.android.nowcapture.capture.requestAppActionSendImage
-import com.homedev.android.nowcapture.capture.scanImageFiles
+import android.view.View
+import com.homedev.android.nowcapture.capture.captureImage
+import com.homedev.android.nowcapture.capture.shareCaptureImage
 import com.homedev.android.nowcapture.common.viewmodel.BaseViewModel
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.processors.PublishProcessor
-import java.io.File
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
@@ -23,20 +25,19 @@ class MainViewModel @Inject constructor() : BaseViewModel() {
         return LiveDataReactiveStreams.fromPublisher(actionSignal)
     }
 
-    fun requestImageCapture(imageFile: File) {
-        scanImageFiles(imageFile) {
-            openScreenshot(imageFile)
-        }
-
-        actionSignal.onNext(ACTION.IMAGE_CAPTURE)
+    fun requestImageCapture(captureView: View) {
+        addDisposable(Observable.fromCallable { captureImage(captureView) }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { actionSignal.onNext(ACTION.IMAGE_CAPTURE) })
     }
 
-    fun requestImageShare(imageFile: File, packageManager: PackageManager) {
-        scanImageFiles(imageFile) {
-            requestAppActionSendImage(imageFile, packageManager)
-        }
 
-        actionSignal.onNext(ACTION.IMAGE_SHARE)
+    fun requestImageShare(captureView: View, packageManager: PackageManager) {
+        addDisposable(Observable.fromCallable { shareCaptureImage(captureView, packageManager) }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { actionSignal.onNext(ACTION.IMAGE_SHARE) })
     }
 
     enum class ACTION {

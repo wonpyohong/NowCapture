@@ -9,7 +9,6 @@ import android.widget.Toast
 import com.gun0912.tedpermission.PermissionListener
 import com.homedev.android.nowcapture.NowService
 import com.homedev.android.nowcapture.R
-import com.homedev.android.nowcapture.capture.capture
 import com.homedev.android.nowcapture.common.viewmodel.DaggerViewModelFactory
 import com.homedev.android.nowcapture.common.viewmodel.ViewModelKey
 import com.homedev.android.nowcapture.support.OverlayPermissionHelper
@@ -56,31 +55,29 @@ class MainActivity : DaggerAppCompatActivity() {
 
     private fun initClickListeners() {
         screenShotButton.setOnClickListener {
-            val imageFile = capture(window.decorView.rootView)
-            viewModel.requestImageCapture(imageFile)
+            viewModel.requestImageCapture(window.decorView.rootView)
         }
 
         startfloatingButton.setOnClickListener {
-            startService(Intent(this@MainActivity, NowService::class.java))
+            startService(Intent(this, NowService::class.java))
             finish()
         }
 
         getActionSendAppList.setOnClickListener {
-            val imageFile = capture(window.decorView.rootView)
-            viewModel.requestImageShare(imageFile, packageManager)
+            viewModel.requestImageShare(window.decorView.rootView, packageManager)
         }
     }
 
     private fun showPermissions() {
         showStoragePermission()
-        showOverlayPermissionIfPossible()
+        showOverlayPermission()
     }
 
     private fun showStoragePermission() {
         PermissionHelper.requestPermissionIfNeed(this, permissionListener)
     }
 
-    private fun showOverlayPermissionIfPossible() {
+    private fun showOverlayPermission() {
         OverlayPermissionHelper.requestOverlayPermission(this)
     }
 
