@@ -8,7 +8,7 @@ import io.reactivex.disposables.Disposable
  * Created by jaehyunpark on 2018. 10. 30..
  */
 open class BaseViewModel : ViewModel() {
-    val compositeDisposable: CompositeDisposable = CompositeDisposable()
+    private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     fun addDisposable(disposable: Disposable) {
         compositeDisposable.add(disposable)

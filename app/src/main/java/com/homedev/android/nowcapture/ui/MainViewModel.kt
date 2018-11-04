@@ -7,7 +7,7 @@ import android.view.View
 import com.homedev.android.nowcapture.capture.captureImage
 import com.homedev.android.nowcapture.capture.shareCaptureImage
 import com.homedev.android.nowcapture.common.viewmodel.BaseViewModel
-import io.reactivex.Observable
+import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.processors.PublishProcessor
 import io.reactivex.schedulers.Schedulers
@@ -17,7 +17,6 @@ import javax.inject.Inject
  * Created by jaehyunpark on 2018. 10. 31..
  */
 
-
 class MainViewModel @Inject constructor() : BaseViewModel() {
     private val actionSignal: PublishProcessor<ACTION> = PublishProcessor.create()
 
@@ -26,7 +25,7 @@ class MainViewModel @Inject constructor() : BaseViewModel() {
     }
 
     fun requestImageCapture(captureView: View) {
-        addDisposable(Observable.fromCallable { captureImage(captureView) }
+        addDisposable(Completable.fromAction { captureImage(captureView) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { actionSignal.onNext(ACTION.IMAGE_CAPTURE) })
@@ -34,7 +33,7 @@ class MainViewModel @Inject constructor() : BaseViewModel() {
 
 
     fun requestImageShare(captureView: View, packageManager: PackageManager) {
-        addDisposable(Observable.fromCallable { shareCaptureImage(captureView, packageManager) }
+        addDisposable(Completable.fromAction { shareCaptureImage(captureView, packageManager) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { actionSignal.onNext(ACTION.IMAGE_SHARE) })
